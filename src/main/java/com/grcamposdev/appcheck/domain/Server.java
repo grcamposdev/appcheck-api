@@ -1,17 +1,30 @@
 package com.grcamposdev.appcheck.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Server {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
+public class Server implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String hostname;
 	private String ip;
 	private String so;
 	private String type;
-
+	
+	@OneToMany(mappedBy = "server")
 	private List<Service> service = new ArrayList<>();
 
 	public Server() {
